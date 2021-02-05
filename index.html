@@ -7,18 +7,30 @@
     font-size:100px;
     text-align: center;
 }
-
+.cc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 </style>
 </head>
 <body>
     <p id="TimerDisplay">25:00</p>
-    <button type="button" onclick="clearInterval(timer)">STOP</button>
-    
+    <div class="cc">
+        <button type="button" onclick="reset()">RESET</button> 
+    </div>>
     <script>
         var sec = 59;
         var min = 24;
+        function reset(){
+            min = 24;
+            sec = 59;
+        }
         var timer = setInterval(function(){
-        document.getElementById('TimerDisplay').innerHTML= min +":"+ sec;
+        if(sec < 10)
+            document.getElementById("TimerDisplay").innerHTML = min +":0" + sec;
+        else
+            document.getElementById('TimerDisplay').innerHTML= min +":"+ sec;
         if (sec < 0 && min <0) {
             clearInterval(timer);
         }
