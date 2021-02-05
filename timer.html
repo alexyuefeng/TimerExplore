@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<title>A Count Down Timer</title>
+<style>
+#TimerDisplay {
+    font-size:100px;
+    text-align: center;
+}
+
+</style>
+</head>
+<body>
+    <p id="TimerDisplay">25:00</p>
+    <button type="button" onclick="clearInterval(timer)">STOP</button>
+    
+    <script>
+        var sec = 59;
+        var min = 24;
+        var timer = setInterval(function(){
+        document.getElementById('TimerDisplay').innerHTML= min +":"+ sec;
+        if (sec < 0 && min <0) {
+            clearInterval(timer);
+        }
+        else if(sec == 0){
+            min--;
+            sec = 60;
+        }
+        sec--;
+    }, 1000);
+    </script>
+</body>
+</html>
