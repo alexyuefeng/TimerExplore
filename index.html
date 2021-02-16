@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
+<meta charset="UTF-8">
 <head>
-<title>A Count Down Timer</title>
+<title>A Useless Timer</title>
 <style>
 #TimerDisplay {
     font-size:100px;
@@ -15,31 +16,46 @@
 </style>
 </head>
 <body>
-    <p id="TimerDisplay">25:00</p>
+    <p id="TimerDisplay">Starting</p>
     <div class="cc">
         <button type="button" onclick="reset()">RESET</button> 
-    </div>>
+    </div>
+    <p class = "cc">FAQ: &#9203 Timer will be saved upon closing to help you keep track on the same work!! AMAZING &#x1F921</p>
     <script>
-        var sec = 59;
-        var min = 24;
+        var local = window.localStorage, min = 24, sec = 59;
+        if (local.getItem('min')!=null){
+            min = local.getItem('min');
+            sec = local.getItem('sec');
+        }
+        var timer = setInterval(function(){
+            if(sec < 10)
+                document.getElementById("TimerDisplay").innerHTML = min +":0" + sec;
+            else
+                document.getElementById('TimerDisplay').innerHTML= min +":"+ sec;
+            if (sec < 0 && min <0) {
+                clearInterval(timer);
+            }
+            else if(sec == 0){
+                min--;
+                sec = 60;
+            }
+            sec--;
+        }, 1000);
+        window.onbeforeunload = closing;
+        if(min ==0 && sec ==0){
+            alert("RESETTING");
+            min = 24;
+            sec = 59;
+        }
+
         function reset(){
             min = 24;
             sec = 59;
         }
-        var timer = setInterval(function(){
-        if(sec < 10)
-            document.getElementById("TimerDisplay").innerHTML = min +":0" + sec;
-        else
-            document.getElementById('TimerDisplay').innerHTML= min +":"+ sec;
-        if (sec < 0 && min <0) {
-            clearInterval(timer);
-        }
-        else if(sec == 0){
-            min--;
-            sec = 60;
-        }
-        sec--;
-    }, 1000);
+        function closing(){
+            local.setItem('min', min);
+            local.setItem('sec', sec);
+        };
     </script>
 </body>
 </html>
