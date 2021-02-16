@@ -22,7 +22,7 @@
     </div>
     <p class = "cc">FAQ: &#9203 Timer will be saved upon closing to help you keep track on the same work!! AMAZING &#x1F921</p>
     <script>
-        var local = window.localStorage, min = 24, sec = 59;
+        var local = window.localStorage, min = 25, sec = 00;
         if (local.getItem('min')!=null){
             min = local.getItem('min');
             sec = local.getItem('sec');
@@ -44,13 +44,13 @@
         window.onbeforeunload = closing;
         if(min ==0 && sec ==0){
             alert("RESETTING");
-            min = 24;
-            sec = 59;
+            min = 25;
+            sec = 00;
         }
 
         function reset(){
-            min = 24;
-            sec = 59;
+            min = 25;
+            sec = 00;
         }
         function closing(){
             local.setItem('min', min);
