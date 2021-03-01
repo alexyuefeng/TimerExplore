@@ -5,7 +5,14 @@ To prepare for CSE110 group project :)
 
 
 Current Version: 3/1/2021
+
   You can now set the timer! Be careful, the maximum minute is set to be 480mins which is 8 hours, pls don't work overtime, thank you!
+
+
+
+
+
+
 
 
 Past Version:
