@@ -6,8 +6,8 @@ To prepare for CSE110 group project :)
 
 ## Current Version: 3/1/2021
 
-  # 1.You can now set the timer! Be careful, the maximum minute is set to be 480mins which is 8 hours, pls don't work overtime, thank you! 
-  # 2.keyboard shortcut is added too! you can now press "s" on your keyboard to start/stop the timer.
+  # 1. You can now set the timer! Be careful, the maximum minute is set to be 480mins which is 8 hours, pls don't work overtime, thank you! 
+  # 2. keyboard shortcut is added too! you can now press "s" on your keyboard to start/stop the timer.
 
 
 
