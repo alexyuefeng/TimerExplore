@@ -4,7 +4,7 @@
 <head>
 <title>A Useless Timer</title>
 <style>
-#TimerDisplay {
+#timerDisplay {
     font-size:100px;
     text-align: center;
 }
@@ -16,22 +16,59 @@
 </style>
 </head>
 <body>
-    <p id="TimerDisplay">Starting</p>
+    <p id="timerDisplay">Starting</p>
     <div class="cc">
-        <button type="button" onclick="reset()">RESET</button> 
+        <button type="button" id ="btn">Start</button> 
     </div>
     <p class = "cc">FAQ: &#9203 Timer will be saved upon closing to help you keep track on the same work!! AMAZING &#x1F921</p>
+    
+
     <script>
-        var local = window.localStorage, min = 25, sec = 00;
+        var local = window.localStorage, min = 0, sec = 10;
+        var mybutton = document.getElementById("btn");
+        var timerDisplay = document.getElementById("timerDisplay");
+        var alramAudio = new Audio ("alarm.mp3");
+        var timer;
+        mybutton.onclick = StartStop;
+        
         if (local.getItem('min')!=null){
             min = local.getItem('min');
             sec = local.getItem('sec');
         }
-        var timer = setInterval(function(){
+
+        function StartStop(){
+            play();
+            if(mybutton.innerHTML == "Start"){
+                mybutton.innerHTML = "Stop";
+                timer = setInterval(time, 1000);
+            }
+            else{
+                clearInterval(timer);
+                reset();
+                mybutton.innerHTML = "Start";
+            }
+        }
+
+        window.onbeforeunload = closing;
+
+        
+
+        function play(){
+            var btnAudio = new Audio("btnClick.mp3")
+            btnAudio.play();
+        }
+
+        function time(){
+            if(min ==0 && sec ==0){
+            alramAudio.play();
+            alert("RESETTING");
+            min = 25;
+            sec = 00;
+        }
             if(sec < 10)
-                document.getElementById("TimerDisplay").innerHTML = min +":0" + sec;
+                timerDisplay.innerHTML = min +":0" + sec;
             else
-                document.getElementById('TimerDisplay').innerHTML= min +":"+ sec;
+                timerDisplay.innerHTML= min +":"+ sec;
             if (sec < 0 && min <0) {
                 clearInterval(timer);
             }
@@ -40,18 +77,14 @@
                 sec = 60;
             }
             sec--;
-        }, 1000);
-        window.onbeforeunload = closing;
-        if(min ==0 && sec ==0){
-            alert("RESETTING");
-            min = 25;
-            sec = 00;
         }
 
         function reset(){
             min = 25;
             sec = 00;
+            timerDisplay.innerHTML = "25:00";
         }
+
         function closing(){
             local.setItem('min', min);
             local.setItem('sec', sec);
