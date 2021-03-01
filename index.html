@@ -8,11 +8,7 @@
 body {
     background-color: #F4D5CB;
 }
-#timerDisplay {
-    font-size:100px;
-    text-align: center;
-    color: #EA6262;
-}
+
 .cc {
     display: flex;
     justify-content: center;
@@ -28,24 +24,72 @@ body {
     cursor: pointer;
     border-radius: 12px;
 }
+.time{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-size: 12vw;
+    color:#EA6262;
+    display: flex;
+    justify-content: center;
+}
+#minute{
+    background-color: #F4D5CB;
+    color:#EA6262;
+    border: none;
+    width: 20%;
+    font-size: 12vw;
+    text-align: right;
+}
+#second{
+    background-color: #F4D5CB;
+    border: none;
+    color:#EA6262;
+    width: 20%;
+    font-size: 12vw;
+    padding-left: 1.5%;
+    text-align: left;
+}
 </style>
 </head>
 <body>
-    <p id="timerDisplay">Starting</p>
+    <div class = "time">
+        <input type="number" id="minute" value = 25>:  <input type="number" id="second" value = 00>
+    </div>
     <div class="cc">
         <button type="button" id ="btn">Start</button> 
     </div>
-    <p class = "cc">FAQ: &#9203 Timer will be saved upon closing to help you keep track on the same work!! AMAZING &#x1F921</p>
+    <br>
+    <p class = "cc">FAQ: &#9203 Timer will be saved upon closing to help you keep track on the same work!!</p>
+    <p class = "cc">Keyboard Shortcut: &#9199 Press "s" to start/stop the timer</p>
     
 
     <script>
         var local = window.localStorage, min = 25, sec = 0;
         var mybutton = document.getElementById("btn");
-        var timerDisplay = document.getElementById("timerDisplay");
+        var minute = document.getElementById("minute");
+        var second = document.getElementById("second");
         var alramAudio = new Audio ("alarm.mp3");
         var timer;
         mybutton.onclick = StartStop;
-        
+        minute.addEventListener("change", function(num){
+            min = num.target.value;
+            minute.value = min;
+        });
+        second.addEventListener("change", function(num){
+            var n = num.target.value;
+            if(n >60 || n < 0)
+                sec = 0;
+            else
+                sec = n;
+            second.value = sec;
+        });
+        window.addEventListener("keydown", function(event){
+            if(event.code=='KeyS'){
+                StartStop();
+            }
+        });
+
+
         if (local.getItem('min')!=null){
             min = local.getItem('min');
             sec = local.getItem('sec');
@@ -80,10 +124,11 @@ body {
             min = 25;
             sec = 00;
         }
+            minute.value = min;
             if(sec < 10)
-                timerDisplay.innerHTML = min +":0" + sec;
+                second.value = "0" + sec;
             else
-                timerDisplay.innerHTML= min +":"+ sec;
+                second.value = sec;
             if (sec < 0 && min <0) {
                 clearInterval(timer);
             }
