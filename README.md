@@ -9,7 +9,11 @@ Current Version: 3/1/2021
 
 
 Past Version:
+
 -CSS added, a nicer look.
+
 -A 25mins timer with Start/Stop button.
+
 -A 25mins timer with reset button using localStorage to save time when closing/refreshing the page.
+
 -A 25mins timer with reset button. Kind of useless but whatever.
