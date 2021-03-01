@@ -53,7 +53,7 @@ body {
 </head>
 <body>
     <div class = "time">
-        <input type="number" id="minute" value = 25>:  <input type="number" id="second" value = 00>
+        <input type="number" id="minute" value = 25>:  <input type="number" id="second" value = "00">
     </div>
     <div class="cc">
         <button type="button" id ="btn">Start</button> 
@@ -64,7 +64,7 @@ body {
     
 
     <script>
-        var local = window.localStorage, min = 25, sec = 00;
+        var local = window.localStorage, min = 25, sec = "00";
         var mybutton = document.getElementById("btn");
         var minute = document.getElementById("minute");
         var second = document.getElementById("second");
@@ -80,7 +80,7 @@ body {
         second.addEventListener("change", function(num){
             var n = num.target.value;
             if(n >60 || n < 0)
-                sec = 00;
+                sec = "00";
             else
                 sec = n;
             second.value = sec;
@@ -123,8 +123,7 @@ body {
             if(min ==0 && sec ==0){
             alramAudio.play();
             alert("RESETTING");
-            min = 25;
-            sec = 00;
+            StartStop();
         }
             minute.value = min;
             if(sec < 10)
@@ -143,8 +142,9 @@ body {
 
         function reset(){
             min = 25;
-            sec = 00;
-            timerDisplay.innerHTML = "25:00";
+            sec = 0;
+            minute.value = 25;
+            second.value = "00";
         }
 
         function closing(){
