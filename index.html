@@ -64,7 +64,7 @@ body {
     
 
     <script>
-        var local = window.localStorage, min = 25, sec = 00;
+        var local = window.localStorage, min = 25, sec = 0;
         var mybutton = document.getElementById("btn");
         var minute = document.getElementById("minute");
         var second = document.getElementById("second");
@@ -152,6 +152,8 @@ body {
 
         function closing(){
             local.setItem('min', min);
+            if (sec == 0)
+                sec = "00";
             local.setItem('sec', sec);
         };
     </script>
