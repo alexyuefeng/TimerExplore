@@ -53,7 +53,7 @@ body {
 </head>
 <body>
     <div class = "time">
-        <input type="number" id="minute" value = 25>:  <input type="number" id="second" value = "00">
+        <input type="number" id="minute" value = 25>:  <input type="number" id="second" value = 00>
     </div>
     <div class="cc">
         <button type="button" id ="btn">Start</button> 
@@ -64,12 +64,18 @@ body {
     
 
     <script>
-        var local = window.localStorage, min = 25, sec = "00";
+        var local = window.localStorage, min = 25, sec = 00;
         var mybutton = document.getElementById("btn");
         var minute = document.getElementById("minute");
         var second = document.getElementById("second");
         var alramAudio = new Audio ("alarm.mp3");
         var timer;
+        if (local.getItem('min')!=null){
+            min = local.getItem('min');
+            sec = local.getItem('sec');
+            minute.value = min;
+            second.value = sec;
+        }
         mybutton.onclick = StartStop;
         minute.addEventListener("change", function(num){
             min = num.target.value;
@@ -79,24 +85,21 @@ body {
         });
         second.addEventListener("change", function(num){
             var n = num.target.value;
-            if(n >60 || n < 0)
+            if(n >59 || n < 0)
                 sec = "00";
             else
                 sec = n;
             second.value = sec;
         });
+
         window.addEventListener("keydown", function(event){
             if(event.code=='KeyS'){
                 StartStop();
             }
+            else if(event.code=='KeyR'){
+                reset();
+            }
         });
-
-
-        if (local.getItem('min')!=null){
-            min = local.getItem('min');
-            sec = local.getItem('sec');
-        }
-
         function StartStop(){
             play();
             if(mybutton.innerHTML == "Start"){
@@ -122,12 +125,12 @@ body {
         function time(){
             if(min ==0 && sec ==0){
             alramAudio.play();
-            alert("RESETTING");
             StartStop();
+            alert("Time's up");
         }
             minute.value = min;
             if(sec < 10)
-                second.value = "0" + sec;
+                second.value = "0" + Number(sec);
             else
                 second.value = sec;
             if (sec < 0 && min <0) {
@@ -142,7 +145,7 @@ body {
 
         function reset(){
             min = 25;
-            sec = 0;
+            sec = 00;
             minute.value = 25;
             second.value = "00";
         }
