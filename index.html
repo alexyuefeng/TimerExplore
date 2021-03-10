@@ -92,14 +92,12 @@ body {
             second.value = sec;
         });
 
-        window.addEventListener("keydown", function(event){
+        window.addEventListener("keyup", function(event){
             if(event.code=='KeyS'){
                 StartStop();
             }
-            else if(event.code=='KeyR'){
-                reset();
-            }
         });
+        
         function StartStop(){
             play();
             if(mybutton.innerHTML == "Start"){
